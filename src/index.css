@@ -43,3 +43,25 @@ body {
   width: 100%;
   height: 100%;
 }
+/* ... dein vorhandener Code ... */
+
+@keyframes logo-pulse-shine {
+  0% {
+    filter: brightness(1) drop-shadow(0 0 15px rgba(0, 217, 255, 0.2));
+    transform: scale(1);
+  }
+  50% {
+    /* Helleres Leuchten (Shiny Effekt) */
+    filter: brightness(1.3) drop-shadow(0 0 30px rgba(0, 217, 255, 0.6));
+    transform: scale(1.02);
+  }
+  100% {
+    filter: brightness(1) drop-shadow(0 0 15px rgba(0, 217, 255, 0.2));
+    transform: scale(1);
+  }
+}
+
+.logo-shine {
+  will-change: filter, transform;
+  animation: logo-pulse-shine 3s ease-in-out infinite;
+}

@@ -1,45 +1,34 @@
-// App.jsx
-import { useEffect } from "react";
 import LightRays from "./components/LightRays";
 import ClickSpark from "./components/ClickSpark";
-import logoBg from "./assets/logo-bg.svg"; // Dein cooles SVG
-// Spinner & CountUp nicht mehr nötig
+import logoBg from "./assets/logo-bg.svg";
+
+// Kein ElectricBorder, keine CSS-Animationen mehr importiert oder genutzt.
 
 function App() {
-  useEffect(() => {
-    const setVh = () => {
-      document.documentElement.style.setProperty(
-        "--vh",
-        `${window.innerHeight * 0.01}px`
-      );
-    };
-    setVh();
-    window.addEventListener("resize", setVh);
-    return () => window.removeEventListener("resize", setVh);
-  }, []);
-
   return (
     <div
       style={{
         width: "100vw",
-        height: "100dvh", // Safari Mobile Fix
+        height: "100dvh",
         position: "relative",
         backgroundColor: "#020817",
         overflow: "hidden",
       }}
     >
+      {/* 1. Hintergrund-Effekt: Strahlen */}
       <LightRays
         raysOrigin="top-center"
         raysColor="#00D9FF"
         raysSpeed={1.5}
-        lightSpread={0.8}
-        rayLength={1.2}
+        lightSpread={1.0}
+        rayLength={1.4}
         followMouse={true}
-        mouseInfluence={0.1}
-        noiseAmount={0.1}
+        mouseInfluence={0.2}
+        noiseAmount={0.08}
         distortion={0.05}
       />
 
+      {/* Wrapper für Klick-Effekt */}
       <div
         style={{
           position: "absolute",
@@ -47,6 +36,7 @@ function App() {
           zIndex: 10,
         }}
       >
+        {/* 2. Interaktions-Effekt: Funken bei Klick */}
         <ClickSpark
           sparkColor="#00D9FF"
           sparkSize={10}
@@ -55,6 +45,7 @@ function App() {
           duration={500}
           extraScale={1.2}
         >
+          {/* Zentrierter Inhalt */}
           <div
             style={{
               width: "100%",
@@ -65,33 +56,33 @@ function App() {
               justifyContent: "center",
             }}
           >
-            {/* Hero Logo */}
-            <div style={{ position: "relative", marginBottom: "1.5rem" }}>
+            {/* Logo Bereich - CLEAN, ohne Animationen */}
+            <div style={{ marginBottom: "2rem" }}>
               <img
                 src={logoBg}
                 alt="Michaels Mind"
                 style={{
-                  width: "70vw", // Groß, aber nicht zu wuchtig
+                  width: "70vw",
                   maxWidth: "450px",
                   height: "auto",
-                  filter: "drop-shadow(0 0 15px rgba(0, 217, 255, 0.15))", // Subtiler Glow
-                  opacity: 0.95,
                   display: "block",
+                  // Nur minimaler statischer Schatten für Abhebung vom dunklen Hintergrund
+                  filter: "drop-shadow(0 0 10px rgba(0, 0, 0, 0.5))", 
                 }}
               />
             </div>
 
-            {/* Minimalistischer Text */}
+            {/* Text Bereich */}
             <p
               style={{
                 color: "#00D9FF",
-                fontFamily: "'Courier New', Courier, monospace", // Tech/Code Font
+                fontFamily: "'Courier New', Courier, monospace",
                 fontSize: "0.9rem",
                 letterSpacing: "0.3em",
                 textTransform: "uppercase",
                 opacity: 0.6,
                 margin: 0,
-                textShadow: "0 0 5px rgba(0, 217, 255, 0.3)",
+                pointerEvents: "none",
               }}
             >
               Loading Future
