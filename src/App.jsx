@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import LightRays from './components/LightRays';
 import CountUp from './components/CountUp';
 import Spinner from './components/Spinner';
+import ClickSpark from './components/ClickSpark';
 import './components/Spinner.css';
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
     <div
       style={{
         width: '100vw',
-        height: '100dvh',  // Safari Mobile Fix: dynamic viewport height
+        height: '100dvh', // Safari Mobile Fix: dynamic viewport height
         position: 'relative',
         backgroundColor: '#020817',
         overflow: 'hidden',
@@ -41,42 +42,65 @@ function App() {
         style={{
           position: 'absolute',
           inset: 0,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
           zIndex: 10,
         }}
       >
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
-            <span
+        <ClickSpark
+          sparkColor="#00D9FF"
+          sparkSize={10}
+          sparkRadius={25}
+          sparkCount={10}
+          duration={500}
+          extraScale={1.2}
+        >
+          <div
+            style={{
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <div
               style={{
-                color: '#00D9FF',
-                fontSize: 'clamp(3rem, 10vw, 6rem)',
-                fontWeight: 900,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '1rem',
               }}
             >
-              <CountUp
-                from={0}
-                to={99}
-                separator=""
-                direction="up"
-                duration={1.5}
-              />
-            </span>
-            <span
-              style={{
-                color: '#00D9FF',
-                fontSize: '2rem',
-                fontWeight: 500,
-              }}
-            >
-              %
-            </span>
-          </div>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
+                <span
+                  style={{
+                    color: '#00D9FF',
+                    fontSize: 'clamp(3rem, 10vw, 6rem)',
+                    fontWeight: 900,
+                  }}
+                >
+                  <CountUp
+                    from={0}
+                    to={99}
+                    separator=""
+                    direction="up"
+                    duration={1.5}
+                  />
+                </span>
+                <span
+                  style={{
+                    color: '#00D9FF',
+                    fontSize: '2rem',
+                    fontWeight: 500,
+                  }}
+                >
+                  %
+                </span>
+              </div>
 
-          <Spinner />
-        </div>
+              <Spinner />
+            </div>
+          </div>
+        </ClickSpark>
       </div>
     </div>
   );
