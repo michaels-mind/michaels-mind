@@ -1,21 +1,30 @@
 // App.jsx
+import { useEffect } from 'react';
 import LightRays from './components/LightRays';
 import CountUp from './components/CountUp';
 import Spinner from './components/Spinner';
 import './components/Spinner.css';
 
 function App() {
+  useEffect(() => {
+    const setVh = () => {
+      document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+    };
+    setVh();
+    window.addEventListener('resize', setVh);
+    return () => window.removeEventListener('resize', setVh);
+  }, []);
+
   return (
     <div
       style={{
         width: '100vw',
-        height: '100vh',        // exakt wie das 600px-Beispiel, nur fullscreen
+        height: '100dvh',  // Safari Mobile Fix: dynamic viewport height
         position: 'relative',
         backgroundColor: '#020817',
         overflow: 'hidden',
       }}
     >
-      {/* LightRays füllt diesen Wrapper vollständig */}
       <LightRays
         raysOrigin="top-center"
         raysColor="#00D9FF"
@@ -28,7 +37,6 @@ function App() {
         distortion={0.05}
       />
 
-      {/* Inhalt zentriert innerhalb des gleichen Wrappers */}
       <div
         style={{
           position: 'absolute',
