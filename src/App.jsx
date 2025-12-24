@@ -1,29 +1,31 @@
 // App.jsx
-import { useEffect } from 'react';
-import LightRays from './components/LightRays';
-import CountUp from './components/CountUp';
-import Spinner from './components/Spinner';
-import ClickSpark from './components/ClickSpark';
-import './components/Spinner.css';
+import { useEffect } from "react";
+import LightRays from "./components/LightRays";
+import ClickSpark from "./components/ClickSpark";
+import logoBg from "./assets/logo-bg.svg"; // Dein cooles SVG
+// Spinner & CountUp nicht mehr nötig
 
 function App() {
   useEffect(() => {
     const setVh = () => {
-      document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+      document.documentElement.style.setProperty(
+        "--vh",
+        `${window.innerHeight * 0.01}px`
+      );
     };
     setVh();
-    window.addEventListener('resize', setVh);
-    return () => window.removeEventListener('resize', setVh);
+    window.addEventListener("resize", setVh);
+    return () => window.removeEventListener("resize", setVh);
   }, []);
 
   return (
     <div
       style={{
-        width: '100vw',
-        height: '100dvh', // Safari Mobile Fix: dynamic viewport height
-        position: 'relative',
-        backgroundColor: '#020817',
-        overflow: 'hidden',
+        width: "100vw",
+        height: "100dvh", // Safari Mobile Fix
+        position: "relative",
+        backgroundColor: "#020817",
+        overflow: "hidden",
       }}
     >
       <LightRays
@@ -40,7 +42,7 @@ function App() {
 
       <div
         style={{
-          position: 'absolute',
+          position: "absolute",
           inset: 0,
           zIndex: 10,
         }}
@@ -55,50 +57,45 @@ function App() {
         >
           <div
             style={{
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            <div
+            {/* Hero Logo */}
+            <div style={{ position: "relative", marginBottom: "1.5rem" }}>
+              <img
+                src={logoBg}
+                alt="Michaels Mind"
+                style={{
+                  width: "70vw", // Groß, aber nicht zu wuchtig
+                  maxWidth: "450px",
+                  height: "auto",
+                  filter: "drop-shadow(0 0 15px rgba(0, 217, 255, 0.15))", // Subtiler Glow
+                  opacity: 0.95,
+                  display: "block",
+                }}
+              />
+            </div>
+
+            {/* Minimalistischer Text */}
+            <p
               style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '1rem',
+                color: "#00D9FF",
+                fontFamily: "'Courier New', Courier, monospace", // Tech/Code Font
+                fontSize: "0.9rem",
+                letterSpacing: "0.3em",
+                textTransform: "uppercase",
+                opacity: 0.6,
+                margin: 0,
+                textShadow: "0 0 5px rgba(0, 217, 255, 0.3)",
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
-                <span
-                  style={{
-                    color: '#00D9FF',
-                    fontSize: 'clamp(3rem, 10vw, 6rem)',
-                    fontWeight: 900,
-                  }}
-                >
-                  <CountUp
-                    from={0}
-                    to={99}
-                    separator=""
-                    direction="up"
-                    duration={1.5}
-                  />
-                </span>
-                <span
-                  style={{
-                    color: '#00D9FF',
-                    fontSize: '2rem',
-                    fontWeight: 500,
-                  }}
-                >
-                  %
-                </span>
-              </div>
-
-              <Spinner />
-            </div>
+              Loading Future
+            </p>
           </div>
         </ClickSpark>
       </div>
